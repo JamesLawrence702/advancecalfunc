@@ -32,7 +32,19 @@ public class MathExpressions {
 	                }
 	                continue; // Skip the rest for factorial
 	            } else if (ch == '√') {
-	                if (!operands.isEmpty()) {
+	                // Handle square root as the first operator
+	                if (operands.isEmpty()) {
+	                    // Look ahead for the number after the square root symbol
+	                    String value = "";
+	                    i++;
+	                    while (i < exp.length() && (Character.isDigit(exp.charAt(i)) || exp.charAt(i) == '.')) {
+	                        value += exp.charAt(i++);
+	                    }
+	                    i--; // Step back after capturing the number
+	                    double num = Double.parseDouble(value);
+	                    if (num < 0) return NEGATIVE_SQRT; // Handle negative square root
+	                    operands.push(Math.sqrt(num));
+	                } else {
 	                    double num = operands.pop();
 	                    if (num < 0) return NEGATIVE_SQRT; // Handle negative square root
 	                    operands.push(Math.sqrt(num));
