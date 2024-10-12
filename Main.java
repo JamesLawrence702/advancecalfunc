@@ -59,6 +59,7 @@ public class Main extends Application {
         pane.getChildren().add(createButton("!", this::processFactorial)); // Factorial button
         
         pane.getChildren().add(createButton("√", this::processOperator));
+        
 
         BorderPane root = new BorderPane();
         root.setTop(stackPane);
@@ -147,26 +148,14 @@ public class Main extends Application {
         }
     }
 
-
-
     private void processFactorial(ActionEvent e) {
         String text = textField.getText();
         if (!text.isEmpty()) {
-            try {
-                double num = Double.parseDouble(text);
-                int intNum = (int) num;
-
-                if (num == intNum && intNum >= 0) { // Check if it's a non-negative integer
-                    long result = factorial(intNum);
-                    textField.setText(Long.toString(result));
-                } else {
-                    textField.setText("Invalid input");
-                }
-            } catch (NumberFormatException ex) {
-                textField.setText("Invalid input");
-            }
+            // Append '!' symbol, don't compute immediately
+            textField.setText(text + "!");
         }
     }
+
 
     private long factorial(int n) {
         if (n == 0) return 1;
