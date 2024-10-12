@@ -61,6 +61,9 @@ public class Main extends Application {
         pane.getChildren().add(createButton("√", this::processOperator));
         pane.getChildren().add(createButton("(", this::processOperator)); // Opening parenthesis
         pane.getChildren().add(createButton(")", this::processOperator)); // Closing parenthesis
+     // Add this line in the pane.getChildren() section to create the exponent button
+        pane.getChildren().add(createButton("^", this::processOperator)); // Exponent button
+
 
         
 
