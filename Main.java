@@ -112,14 +112,21 @@ public class Main extends Application {
         String value = button.getText();
         String text = textField.getText();
 
+        if (start && value.equals("√")) {
+            // Handle square root as the first input, so it applies to the next number
+            textField.setText("√");
+            start = false;
+            return;
+        }
+
         if (start) {
             textField.setText("");
             start = false;
         }
 
-        if (!text.isEmpty()) {
+        if (!text.isEmpty() || value.equals("√")) {
             // Check the last character before adding the operator
-            char lastChar = text.charAt(text.length() - 1);
+            char lastChar = text.isEmpty() ? ' ' : text.charAt(text.length() - 1);  // Handle empty text case
 
             if (isOperator(lastChar) && lastChar != '!') {
                 // If the last character is an operator (but not factorial), replace it
@@ -139,6 +146,9 @@ public class Main extends Application {
             }
         }
     }
+
+
+
     private void processFactorial(ActionEvent e) {
         String text = textField.getText();
         if (!text.isEmpty()) {
